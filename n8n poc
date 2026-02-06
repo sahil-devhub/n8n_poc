@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-01-31T20:22:26.393Z",
+  "updatedAt": "2026-02-06T10:44:10.089Z",
   "createdAt": "2026-01-31T17:47:38.143Z",
   "id": "_F-D_Zgo3fBtG1KlhgpvJ",
   "name": "My workflow",
@@ -134,9 +134,9 @@
     "templateCredsSetupCompleted": true
   },
   "pinData": {},
-  "versionId": "5df867fa-c5d8-40bb-b41f-da88322e2d39",
+  "versionId": "2af32c62-5227-471f-ac55-c990e642fda9",
   "activeVersionId": "1cdc678b-3b43-4aa3-b868-e749e10d3ea1",
-  "versionCounter": 10,
+  "versionCounter": 12,
   "triggerCount": 1,
   "shared": [
     {
