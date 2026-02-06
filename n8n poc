@@ -1,0 +1,335 @@
+{
+  "updatedAt": "2026-01-31T20:22:26.393Z",
+  "createdAt": "2026-01-31T17:47:38.143Z",
+  "id": "_F-D_Zgo3fBtG1KlhgpvJ",
+  "name": "My workflow",
+  "description": null,
+  "active": true,
+  "isArchived": false,
+  "nodes": [
+    {
+      "parameters": {
+        "updates": [
+          "message"
+        ],
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        0
+      ],
+      "id": "6fab4d82-2c4e-4508-a514-608ad3907b2e",
+      "name": "Telegram Trigger",
+      "webhookId": "1b6711af-5eb8-4840-9145-e2f4c259af38",
+      "credentials": {
+        "telegramApi": {
+          "id": "qa0IGKDnMmKLCWoD",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $jso$json.message.chat.idn.message.text }}",
+        "options": {
+          "systemMessage": "you are helpful assistant."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        208,
+        0
+      ],
+      "id": "178aafbc-4f9f-47d1-bfa6-2d0cd7954f29",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Telegram Trigger').item.json.message.chat.id }}",
+        "text": "={{ $json.output }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        560,
+        0
+      ],
+      "id": "e698afcd-1716-4459-8495-ab05e76da02f",
+      "name": "Send a text message",
+      "webhookId": "16826d59-46a6-4bfb-a87e-b48fbf7eb086",
+      "credentials": {
+        "telegramApi": {
+          "id": "qa0IGKDnMmKLCWoD",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": "openai/gpt-oss-120b",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
+      "typeVersion": 1,
+      "position": [
+        80,
+        208
+      ],
+      "id": "433b9a2d-1de0-4356-88ee-c35d8200f5ac",
+      "name": "Groq Chat Model",
+      "credentials": {
+        "groqApi": {
+          "id": "TSkniIAo10xC8xNm",
+          "name": "Groq account"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Telegram Trigger": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Send a text message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Groq Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false
+  },
+  "staticData": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "pinData": {},
+  "versionId": "5df867fa-c5d8-40bb-b41f-da88322e2d39",
+  "activeVersionId": "1cdc678b-3b43-4aa3-b868-e749e10d3ea1",
+  "versionCounter": 10,
+  "triggerCount": 1,
+  "shared": [
+    {
+      "updatedAt": "2026-01-31T17:47:38.166Z",
+      "createdAt": "2026-01-31T17:47:38.166Z",
+      "role": "workflow:owner",
+      "workflowId": "_F-D_Zgo3fBtG1KlhgpvJ",
+      "projectId": "UuZPCWkDTuWJ0Efj",
+      "project": {
+        "updatedAt": "2026-02-06T07:49:05.764Z",
+        "createdAt": "2026-01-31T17:33:09.126Z",
+        "id": "UuZPCWkDTuWJ0Efj",
+        "name": "Sahil Kumar <sk3458162@gmail.com>",
+        "type": "personal",
+        "icon": null,
+        "description": null,
+        "creatorId": "26249ff5-3815-430e-9a8e-c72138f87aad",
+        "projectRelations": [
+          {
+            "updatedAt": "2026-01-31T17:33:09.128Z",
+            "createdAt": "2026-01-31T17:33:09.128Z",
+            "userId": "26249ff5-3815-430e-9a8e-c72138f87aad",
+            "projectId": "UuZPCWkDTuWJ0Efj",
+            "user": {
+              "updatedAt": "2026-02-06T07:50:43.744Z",
+              "createdAt": "2026-01-31T17:33:06.443Z",
+              "id": "26249ff5-3815-430e-9a8e-c72138f87aad",
+              "email": "sk3458162@gmail.com",
+              "firstName": "Sahil",
+              "lastName": "Kumar",
+              "personalizationAnswers": {
+                "version": "v4",
+                "personalization_survey_submitted_at": "2026-01-31T17:45:41.379Z",
+                "personalization_survey_n8n_version": "2.3.5"
+              },
+              "settings": {
+                "userActivated": true,
+                "easyAIWorkflowOnboarded": true,
+                "firstSuccessfulWorkflowId": "_F-D_Zgo3fBtG1KlhgpvJ",
+                "userActivatedAt": 1769886871739,
+                "npsSurvey": {
+                  "responded": true,
+                  "lastShownAt": 1770364237985
+                }
+              },
+              "disabled": false,
+              "mfaEnabled": false,
+              "lastActiveAt": "2026-02-06",
+              "isPending": false
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "tags": [],
+  "activeVersion": {
+    "updatedAt": "2026-01-31T19:14:14.000Z",
+    "createdAt": "2026-01-31T19:14:04.710Z",
+    "versionId": "1cdc678b-3b43-4aa3-b868-e749e10d3ea1",
+    "workflowId": "_F-D_Zgo3fBtG1KlhgpvJ",
+    "nodes": [
+      {
+        "parameters": {
+          "updates": [
+            "message"
+          ],
+          "additionalFields": {}
+        },
+        "type": "n8n-nodes-base.telegramTrigger",
+        "typeVersion": 1.2,
+        "position": [
+          0,
+          0
+        ],
+        "id": "6fab4d82-2c4e-4508-a514-608ad3907b2e",
+        "name": "Telegram Trigger",
+        "webhookId": "1b6711af-5eb8-4840-9145-e2f4c259af38",
+        "credentials": {
+          "telegramApi": {
+            "id": "qa0IGKDnMmKLCWoD",
+            "name": "Telegram account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "promptType": "define",
+          "text": "={{ $json.message.text }}",
+          "options": {
+            "systemMessage": "You are chill friend who always talk in hinglish but behaves always like sex pervert who talking with abusive words and not also uses abusive words like for example gaand faar dunga teri, lodu, gaandu etc. and many more as you can, as like roaster friend. And your output always in1 or 2 lines only.\n\n"
+          }
+        },
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "typeVersion": 3.1,
+        "position": [
+          208,
+          0
+        ],
+        "id": "178aafbc-4f9f-47d1-bfa6-2d0cd7954f29",
+        "name": "AI Agent"
+      },
+      {
+        "parameters": {
+          "chatId": "={{ $('Telegram Trigger').item.json.message.chat.id }}",
+          "text": "={{ $json.output }}",
+          "additionalFields": {}
+        },
+        "type": "n8n-nodes-base.telegram",
+        "typeVersion": 1.2,
+        "position": [
+          560,
+          0
+        ],
+        "id": "e698afcd-1716-4459-8495-ab05e76da02f",
+        "name": "Send a text message",
+        "webhookId": "16826d59-46a6-4bfb-a87e-b48fbf7eb086",
+        "credentials": {
+          "telegramApi": {
+            "id": "qa0IGKDnMmKLCWoD",
+            "name": "Telegram account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "model": "llama-3.1-8b-instant",
+          "options": {}
+        },
+        "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
+        "typeVersion": 1,
+        "position": [
+          80,
+          208
+        ],
+        "id": "433b9a2d-1de0-4356-88ee-c35d8200f5ac",
+        "name": "Groq Chat Model",
+        "credentials": {
+          "groqApi": {
+            "id": "TSkniIAo10xC8xNm",
+            "name": "Groq account"
+          }
+        }
+      }
+    ],
+    "connections": {
+      "Telegram Trigger": {
+        "main": [
+          [
+            {
+              "node": "AI Agent",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "AI Agent": {
+        "main": [
+          [
+            {
+              "node": "Send a text message",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Groq Chat Model": {
+        "ai_languageModel": [
+          [
+            {
+              "node": "AI Agent",
+              "type": "ai_languageModel",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "authors": "Sahil Kumar",
+    "name": "Version 1cdc678b",
+    "description": "",
+    "autosaved": false,
+    "workflowPublishHistory": [
+      {
+        "createdAt": "2026-01-31T19:14:14.068Z",
+        "id": 1,
+        "workflowId": "_F-D_Zgo3fBtG1KlhgpvJ",
+        "versionId": "1cdc678b-3b43-4aa3-b868-e749e10d3ea1",
+        "event": "activated",
+        "userId": "26249ff5-3815-430e-9a8e-c72138f87aad"
+      }
+    ]
+  }
+}
